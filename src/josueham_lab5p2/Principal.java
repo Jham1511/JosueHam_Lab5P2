@@ -17,6 +17,7 @@ import javax.swing.tree.DefaultTreeModel;
 public class Principal extends javax.swing.JFrame {
 
     ArrayList<Personaje> personajes = new ArrayList();
+
     public Principal() {
         initComponents();
         this.setSize(510, 550);
@@ -57,9 +58,10 @@ public class Principal extends javax.swing.JFrame {
         DialogListar = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         JTreePersonajes = new javax.swing.JScrollPane();
-        jt_personas = new javax.swing.JTree();
+        jt_personajes = new javax.swing.JTree();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_personas = new javax.swing.JList();
+        BtnFlecha = new javax.swing.JButton();
         menu_popup = new javax.swing.JPopupMenu();
         OpListar = new javax.swing.JMenuItem();
         opcion_modificar = new javax.swing.JMenuItem();
@@ -179,33 +181,58 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Personajes");
-        jt_personas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jt_personas.addMouseListener(new java.awt.event.MouseAdapter() {
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("DC");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Marvel");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Mortal Kombat");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Capcom");
+        treeNode1.add(treeNode2);
+        jt_personajes.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_personajes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jt_personasMouseClicked(evt);
+                jt_personajesMouseClicked(evt);
             }
         });
-        JTreePersonajes.setViewportView(jt_personas);
+        JTreePersonajes.setViewportView(jt_personajes);
 
         jl_personas.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(jl_personas);
+
+        BtnFlecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/reply.png"))); // NOI18N
+        BtnFlecha.setBorder(null);
+        BtnFlecha.setOpaque(false);
+        BtnFlecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnFlechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(55, 55, 55)
                 .addComponent(JTreePersonajes, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addGap(49, 49, 49))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BtnFlecha)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addComponent(BtnFlecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(JTreePersonajes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
@@ -216,23 +243,14 @@ public class Principal extends javax.swing.JFrame {
         DialogListar.getContentPane().setLayout(DialogListarLayout);
         DialogListarLayout.setHorizontalGroup(
             DialogListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogListarLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         DialogListarLayout.setVerticalGroup(
             DialogListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogListarLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         OpListar.setText("eliminar persona");
-        OpListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OpListarActionPerformed(evt);
-            }
-        });
         menu_popup.add(OpListar);
 
         opcion_modificar.setText("modificar nombre");
@@ -318,9 +336,47 @@ public class Principal extends javax.swing.JFrame {
         int AgilMental = Integer.parseInt(strAgilidadM);
         String strVida = FieldHP.getText();
         int vida = Integer.parseInt(strVida);
-        
-        
+
         personajes.add(new Personaje(nombre, poder, debilidad, CBUniverso.getItemAt(index), fuerza, AgilFisica, AgilMental, vida));
+        
+        DefaultTreeModel m = (DefaultTreeModel) jt_personajes.getModel();
+
+        DefaultMutableTreeNode raiz
+                = (DefaultMutableTreeNode) m.getRoot();
+
+        DefaultMutableTreeNode nodo_perso;
+
+        for (Personaje p : personajes) {
+            switch (p.getUniverso()) {
+                case "DC": {
+                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+                }
+                break;
+
+                case "Marvel": {
+                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+                }
+                break;
+
+                case "Mortal Kombat": {
+                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+                }
+                break;
+
+                case "Capcom": {
+                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+                }
+                break;
+            }
+
+            m.reload();
+
+           
+    }
         JOptionPane.showMessageDialog(this, "Personaje agregado exitosamente");
     }//GEN-LAST:event_BtnGuardarCRUDActionPerformed
 
@@ -334,59 +390,46 @@ public class Principal extends javax.swing.JFrame {
         CRUD.setVisible(false);
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
-    private void jt_personasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_personasMouseClicked
-        // TODO add your handling code here:
-        if (evt.isMetaDown()) {
-            //seleccionar un nodo con click derecho
-            int row = jt_personas.getClosestRowForLocation(
-                evt.getX(), evt.getY());
-            jt_personas.setSelectionRow(row);
-            Object v1
-            = jt_personas.getSelectionPath().
-            getLastPathComponent();
-            nodo_seleccionado = (DefaultMutableTreeNode) v1;
-            if (nodo_seleccionado.getUserObject() instanceof Personaje) {
-                personaje_seleccionada
-                = (Personaje) nodo_seleccionado.
-                getUserObject();
-                menu_popup.show(evt.getComponent(),
-                    evt.getX(), evt.getY());
-            }
-
-        } 
-    }//GEN-LAST:event_jt_personasMouseClicked
-
-    private void OpListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarActionPerformed
-        // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(
-            this,
-            "Seguro de Eliminar?",
-            "Confirm",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
-
-        if (response == JOptionPane.OK_OPTION) {
-            DefaultTreeModel m
-            = (DefaultTreeModel) jt_personas.getModel();
-            m.removeNodeFromParent(
-                nodo_seleccionado);
-            m.reload();
-        }
-    }//GEN-LAST:event_OpListarActionPerformed
-
     private void opcion_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcion_modificarActionPerformed
         // TODO add your handling code here:
 
         DefaultTreeModel m
-        = (DefaultTreeModel) jt_personas.getModel();
+                = (DefaultTreeModel) jt_personajes.getModel();
         personaje_seleccionada.setNombre(
-            JOptionPane.showInputDialog("nombre"));
+                JOptionPane.showInputDialog("nombre"));
         m.reload();
     }//GEN-LAST:event_opcion_modificarActionPerformed
 
     private void BtnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListarActionPerformed
         abrir_universos();
     }//GEN-LAST:event_BtnListarActionPerformed
+
+    private void BtnFlechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFlechaActionPerformed
+        DialogListar.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_BtnFlechaActionPerformed
+
+    private void jt_personajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_personajesMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            //seleccionar un nodo con click derecho
+            int row = jt_personajes.getClosestRowForLocation(
+                    evt.getX(), evt.getY());
+            jt_personajes.setSelectionRow(row);
+            Object v1
+                    = jt_personajes.getSelectionPath().
+                            getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            if (nodo_seleccionado.getUserObject() instanceof Personaje) {
+                personaje_seleccionada
+                        = (Personaje) nodo_seleccionado.
+                                getUserObject();
+                menu_popup.show(evt.getComponent(),
+                        evt.getX(), evt.getY());
+            }
+
+        }
+    }//GEN-LAST:event_jt_personajesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -423,14 +466,14 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
-    public void abrir_crud (){
+    public void abrir_crud() {
         CRUD.pack();
         CRUD.setLocationRelativeTo(this);
         this.setVisible(false);
         CRUD.setVisible(true);
     }
-    
-    public void abrir_universos(){
+
+    public void abrir_universos() {
         DialogListar.pack();
         DialogListar.setLocationRelativeTo(this);
         this.setVisible(false);
@@ -438,6 +481,7 @@ public class Principal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCrud;
+    private javax.swing.JButton BtnFlecha;
     private javax.swing.JButton BtnGuardarCRUD;
     private javax.swing.JButton BtnListar;
     private javax.swing.JButton BtnRegresar;
@@ -473,10 +517,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList jl_personas;
-    private javax.swing.JTree jt_personas;
+    private javax.swing.JTree jt_personajes;
     private javax.swing.JPopupMenu menu_popup;
     private javax.swing.JMenuItem opcion_modificar;
     // End of variables declaration//GEN-END:variables
 DefaultMutableTreeNode nodo_seleccionado;
-Personaje personaje_seleccionada;
+    Personaje personaje_seleccionada;
 }

@@ -23,6 +23,10 @@ public class Personaje {
         this.hp = hp;
     }
 
+    public Personaje(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Personaje() {
     }
 
