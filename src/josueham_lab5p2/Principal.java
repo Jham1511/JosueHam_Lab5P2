@@ -5,7 +5,10 @@
 package josueham_lab5p2;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -43,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
         LbHP = new javax.swing.JLabel();
         FieldHP = new javax.swing.JTextField();
         LbUniverso = new javax.swing.JLabel();
+        BtnRegresar = new javax.swing.JButton();
         LbAgregar = new javax.swing.JLabel();
         CBUniverso = new javax.swing.JComboBox<>();
         FieldAgilidadF = new javax.swing.JTextField();
@@ -50,6 +54,15 @@ public class Principal extends javax.swing.JFrame {
         LbDebilidad = new javax.swing.JLabel();
         FieldPoder = new javax.swing.JTextField();
         ImagenCrud = new javax.swing.JLabel();
+        DialogListar = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        JTreePersonajes = new javax.swing.JScrollPane();
+        jt_personas = new javax.swing.JTree();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jl_personas = new javax.swing.JList();
+        menu_popup = new javax.swing.JPopupMenu();
+        OpListar = new javax.swing.JMenuItem();
+        opcion_modificar = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelPrincipal = new javax.swing.JPanel();
         BtnSalir = new javax.swing.JButton();
@@ -61,60 +74,75 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LbFuerza.setBackground(new java.awt.Color(102, 102, 102));
+        LbFuerza.setBackground(new java.awt.Color(204, 204, 204));
         LbFuerza.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbFuerza.setForeground(new java.awt.Color(0, 0, 0));
         LbFuerza.setText("Fuerza");
         LbFuerza.setOpaque(true);
         jPanel1.add(LbFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, -1, -1));
 
-        jLabel1.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Agilidad Mental");
         jLabel1.setOpaque(true);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
 
-        BtnGuardarCRUD.setBackground(new java.awt.Color(102, 102, 102));
+        BtnGuardarCRUD.setBackground(new java.awt.Color(255, 255, 255));
         BtnGuardarCRUD.setText("Agregar Personaje");
         BtnGuardarCRUD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnGuardarCRUDActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnGuardarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, -1, -1));
+        jPanel1.add(BtnGuardarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
 
-        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Agilidad Fisica");
         jLabel3.setOpaque(true);
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
         jPanel1.add(FieldAgilidadM, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 120, 30));
         jPanel1.add(FieldFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 130, 30));
 
-        LbNombre.setBackground(new java.awt.Color(102, 102, 102));
+        LbNombre.setBackground(new java.awt.Color(204, 204, 204));
         LbNombre.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbNombre.setForeground(new java.awt.Color(0, 0, 0));
         LbNombre.setText("Nombre");
         LbNombre.setOpaque(true);
         jPanel1.add(LbNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
-        LbPoder.setBackground(new java.awt.Color(102, 102, 102));
+        LbPoder.setBackground(new java.awt.Color(204, 204, 204));
         LbPoder.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbPoder.setForeground(new java.awt.Color(0, 0, 0));
         LbPoder.setText("Poder");
         LbPoder.setOpaque(true);
         jPanel1.add(LbPoder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
         jPanel1.add(FieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 130, 30));
 
-        LbHP.setBackground(new java.awt.Color(102, 102, 102));
+        LbHP.setBackground(new java.awt.Color(204, 204, 204));
         LbHP.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbHP.setForeground(new java.awt.Color(0, 0, 0));
         LbHP.setText("HP");
         LbHP.setOpaque(true);
         jPanel1.add(LbHP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
         jPanel1.add(FieldHP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 120, 30));
 
-        LbUniverso.setBackground(new java.awt.Color(102, 102, 102));
+        LbUniverso.setBackground(new java.awt.Color(204, 204, 204));
         LbUniverso.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbUniverso.setForeground(new java.awt.Color(0, 0, 0));
         LbUniverso.setText("Universo");
         LbUniverso.setOpaque(true);
         jPanel1.add(LbUniverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, 20));
+
+        BtnRegresar.setText("Regresar");
+        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 130, -1));
 
         LbAgregar.setBackground(new java.awt.Color(255, 0, 0));
         LbAgregar.setFont(new java.awt.Font("Stencil", 1, 36)); // NOI18N
@@ -128,8 +156,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(FieldAgilidadF, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 120, 30));
         jPanel1.add(FieldDebilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 130, 30));
 
-        LbDebilidad.setBackground(new java.awt.Color(102, 102, 102));
+        LbDebilidad.setBackground(new java.awt.Color(204, 204, 204));
         LbDebilidad.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbDebilidad.setForeground(new java.awt.Color(0, 0, 0));
         LbDebilidad.setText("Debilidad");
         LbDebilidad.setOpaque(true);
         jPanel1.add(LbDebilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
@@ -149,6 +178,70 @@ public class Principal extends javax.swing.JFrame {
             CRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Personajes");
+        jt_personas.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_personas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_personasMouseClicked(evt);
+            }
+        });
+        JTreePersonajes.setViewportView(jt_personas);
+
+        jl_personas.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(jl_personas);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(JTreePersonajes, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(154, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JTreePersonajes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                .addGap(78, 78, 78))
+        );
+
+        javax.swing.GroupLayout DialogListarLayout = new javax.swing.GroupLayout(DialogListar.getContentPane());
+        DialogListar.getContentPane().setLayout(DialogListarLayout);
+        DialogListarLayout.setHorizontalGroup(
+            DialogListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogListarLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        DialogListarLayout.setVerticalGroup(
+            DialogListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogListarLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        OpListar.setText("eliminar persona");
+        OpListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpListarActionPerformed(evt);
+            }
+        });
+        menu_popup.add(OpListar);
+
+        opcion_modificar.setText("modificar nombre");
+        opcion_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcion_modificarActionPerformed(evt);
+            }
+        });
+        menu_popup.add(opcion_modificar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -178,6 +271,11 @@ public class Principal extends javax.swing.JFrame {
         BtnListar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         BtnListar.setText("Ver Universos");
         BtnListar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnListarActionPerformed(evt);
+            }
+        });
         PanelPrincipal.add(BtnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 160, 40));
 
         BtnSimulacion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -231,6 +329,65 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_BtnSalirActionPerformed
 
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
+        this.setVisible(true);
+        CRUD.setVisible(false);
+    }//GEN-LAST:event_BtnRegresarActionPerformed
+
+    private void jt_personasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_personasMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            //seleccionar un nodo con click derecho
+            int row = jt_personas.getClosestRowForLocation(
+                evt.getX(), evt.getY());
+            jt_personas.setSelectionRow(row);
+            Object v1
+            = jt_personas.getSelectionPath().
+            getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            if (nodo_seleccionado.getUserObject() instanceof Personaje) {
+                personaje_seleccionada
+                = (Personaje) nodo_seleccionado.
+                getUserObject();
+                menu_popup.show(evt.getComponent(),
+                    evt.getX(), evt.getY());
+            }
+
+        } 
+    }//GEN-LAST:event_jt_personasMouseClicked
+
+    private void OpListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(
+            this,
+            "Seguro de Eliminar?",
+            "Confirm",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.OK_OPTION) {
+            DefaultTreeModel m
+            = (DefaultTreeModel) jt_personas.getModel();
+            m.removeNodeFromParent(
+                nodo_seleccionado);
+            m.reload();
+        }
+    }//GEN-LAST:event_OpListarActionPerformed
+
+    private void opcion_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcion_modificarActionPerformed
+        // TODO add your handling code here:
+
+        DefaultTreeModel m
+        = (DefaultTreeModel) jt_personas.getModel();
+        personaje_seleccionada.setNombre(
+            JOptionPane.showInputDialog("nombre"));
+        m.reload();
+    }//GEN-LAST:event_opcion_modificarActionPerformed
+
+    private void BtnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListarActionPerformed
+        abrir_universos();
+    }//GEN-LAST:event_BtnListarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,7 +399,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -269,16 +426,26 @@ public class Principal extends javax.swing.JFrame {
     public void abrir_crud (){
         CRUD.pack();
         CRUD.setLocationRelativeTo(this);
+        this.setVisible(false);
         CRUD.setVisible(true);
+    }
+    
+    public void abrir_universos(){
+        DialogListar.pack();
+        DialogListar.setLocationRelativeTo(this);
+        this.setVisible(false);
+        DialogListar.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCrud;
     private javax.swing.JButton BtnGuardarCRUD;
     private javax.swing.JButton BtnListar;
+    private javax.swing.JButton BtnRegresar;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JButton BtnSimulacion;
     private javax.swing.JComboBox<String> CBUniverso;
     private javax.swing.JDialog CRUD;
+    private javax.swing.JDialog DialogListar;
     private javax.swing.JTextField FieldAgilidadF;
     private javax.swing.JTextField FieldAgilidadM;
     private javax.swing.JTextField FieldDebilidad;
@@ -288,6 +455,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField FieldPoder;
     private javax.swing.JLabel ImagenCrud;
     private javax.swing.JLabel ImagenMenu;
+    private javax.swing.JScrollPane JTreePersonajes;
     private javax.swing.JLabel LbAgregar;
     private javax.swing.JLabel LbDebilidad;
     private javax.swing.JLabel LbFuerza;
@@ -295,11 +463,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LbNombre;
     private javax.swing.JLabel LbPoder;
     private javax.swing.JLabel LbUniverso;
+    private javax.swing.JMenuItem OpListar;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList jl_personas;
+    private javax.swing.JTree jt_personas;
+    private javax.swing.JPopupMenu menu_popup;
+    private javax.swing.JMenuItem opcion_modificar;
     // End of variables declaration//GEN-END:variables
+DefaultMutableTreeNode nodo_seleccionado;
+Personaje personaje_seleccionada;
 }
