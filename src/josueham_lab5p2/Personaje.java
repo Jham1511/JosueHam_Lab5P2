@@ -8,11 +8,11 @@ package josueham_lab5p2;
  *
  * @author skxka
  */
-public class Personajes {
+public class Personaje {
     private String nombre, poder, debilidad, universo;
     private int fuerza,agilidad,mental, hp;
 
-    public Personajes(String nombre, String poder, String debilidad, String universo, int fuerza, int agilidad, int mental, int hp) {
+    public Personaje(String nombre, String poder, String debilidad, String universo, int fuerza, int agilidad, int mental, int hp) {
         this.nombre = nombre;
         this.poder = poder;
         this.debilidad = debilidad;
@@ -23,7 +23,7 @@ public class Personajes {
         this.hp = hp;
     }
 
-    public Personajes() {
+    public Personaje() {
     }
 
     public String getNombre() {

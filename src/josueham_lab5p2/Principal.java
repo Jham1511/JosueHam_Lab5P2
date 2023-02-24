@@ -4,18 +4,19 @@
  */
 package josueham_lab5p2;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author skxka
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    ArrayList<Personaje> personajes = new ArrayList();
     public Principal() {
         initComponents();
-        this.setSize(500, 500);
+        this.setSize(510, 550);
         this.setLocationRelativeTo(null);
     }
 
@@ -28,54 +29,207 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        CRUD = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
+        LbFuerza = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        BtnGuardarCRUD = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        FieldAgilidadM = new javax.swing.JTextField();
+        FieldFuerza = new javax.swing.JTextField();
+        LbNombre = new javax.swing.JLabel();
+        LbPoder = new javax.swing.JLabel();
+        FieldNombre = new javax.swing.JTextField();
+        LbHP = new javax.swing.JLabel();
+        FieldHP = new javax.swing.JTextField();
+        LbUniverso = new javax.swing.JLabel();
+        LbAgregar = new javax.swing.JLabel();
+        CBUniverso = new javax.swing.JComboBox<>();
+        FieldAgilidadF = new javax.swing.JTextField();
+        FieldDebilidad = new javax.swing.JTextField();
+        LbDebilidad = new javax.swing.JLabel();
+        FieldPoder = new javax.swing.JTextField();
+        ImagenCrud = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        PanelPrincipal = new javax.swing.JPanel();
+        BtnSalir = new javax.swing.JButton();
+        BtnCrud = new javax.swing.JButton();
+        BtnListar = new javax.swing.JButton();
+        BtnSimulacion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         ImagenMenu = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LbFuerza.setBackground(new java.awt.Color(102, 102, 102));
+        LbFuerza.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbFuerza.setText("Fuerza");
+        LbFuerza.setOpaque(true);
+        jPanel1.add(LbFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, -1, -1));
+
+        jLabel1.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel1.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        jLabel1.setText("Agilidad Mental");
+        jLabel1.setOpaque(true);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
+
+        BtnGuardarCRUD.setBackground(new java.awt.Color(102, 102, 102));
+        BtnGuardarCRUD.setText("Agregar Personaje");
+        BtnGuardarCRUD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarCRUDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnGuardarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, -1, -1));
+
+        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        jLabel3.setText("Agilidad Fisica");
+        jLabel3.setOpaque(true);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+        jPanel1.add(FieldAgilidadM, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 120, 30));
+        jPanel1.add(FieldFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 130, 30));
+
+        LbNombre.setBackground(new java.awt.Color(102, 102, 102));
+        LbNombre.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbNombre.setText("Nombre");
+        LbNombre.setOpaque(true);
+        jPanel1.add(LbNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+
+        LbPoder.setBackground(new java.awt.Color(102, 102, 102));
+        LbPoder.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbPoder.setText("Poder");
+        LbPoder.setOpaque(true);
+        jPanel1.add(LbPoder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+        jPanel1.add(FieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 130, 30));
+
+        LbHP.setBackground(new java.awt.Color(102, 102, 102));
+        LbHP.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbHP.setText("HP");
+        LbHP.setOpaque(true);
+        jPanel1.add(LbHP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+        jPanel1.add(FieldHP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 120, 30));
+
+        LbUniverso.setBackground(new java.awt.Color(102, 102, 102));
+        LbUniverso.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbUniverso.setText("Universo");
+        LbUniverso.setOpaque(true);
+        jPanel1.add(LbUniverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, 20));
+
+        LbAgregar.setBackground(new java.awt.Color(255, 0, 0));
+        LbAgregar.setFont(new java.awt.Font("Stencil", 1, 36)); // NOI18N
+        LbAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        LbAgregar.setText("Agregar Personaje");
+        LbAgregar.setOpaque(true);
+        jPanel1.add(LbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+
+        CBUniverso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Mortal Kombat", "Capcom" }));
+        jPanel1.add(CBUniverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 110, -1));
+        jPanel1.add(FieldAgilidadF, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 120, 30));
+        jPanel1.add(FieldDebilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 130, 30));
+
+        LbDebilidad.setBackground(new java.awt.Color(102, 102, 102));
+        LbDebilidad.setFont(new java.awt.Font("Stencil", 1, 18)); // NOI18N
+        LbDebilidad.setText("Debilidad");
+        LbDebilidad.setOpaque(true);
+        jPanel1.add(LbDebilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
+        jPanel1.add(FieldPoder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 130, 30));
+
+        ImagenCrud.setBackground(new java.awt.Color(102, 102, 102));
+        ImagenCrud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/1366_2000 (1).jpg"))); // NOI18N
+        jPanel1.add(ImagenCrud, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout CRUDLayout = new javax.swing.GroupLayout(CRUD.getContentPane());
+        CRUD.getContentPane().setLayout(CRUDLayout);
+        CRUDLayout.setHorizontalGroup(
+            CRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CRUDLayout.setVerticalGroup(
+            CRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(0, 102, 204));
-        jLabel2.setFont(new java.awt.Font("Nirmala UI", 1, 36)); // NOI18N
+        BtnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/remove.png"))); // NOI18N
+        BtnSalir.setBorder(null);
+        BtnSalir.setOpaque(false);
+        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalirActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        BtnCrud.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        BtnCrud.setText("CRUD Personajes");
+        BtnCrud.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnCrud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCrudActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(BtnCrud, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 160, 40));
+
+        BtnListar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        BtnListar.setText("Ver Universos");
+        BtnListar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelPrincipal.add(BtnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 160, 40));
+
+        BtnSimulacion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        BtnSimulacion.setText("Simulacion ");
+        BtnSimulacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelPrincipal.add(BtnSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 160, 40));
+
+        jLabel2.setBackground(new java.awt.Color(255, 0, 51));
+        jLabel2.setFont(new java.awt.Font("Stencil", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Menu Principal");
         jLabel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jLabel2.setOpaque(true);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
+        PanelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
 
         ImagenMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/artworks-AL425TG2qNymf0CP-fnmSIg-t500x500.jpg"))); // NOI18N
-        jPanel1.add(ImagenMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 516, -1));
+        PanelPrincipal.add(ImagenMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 516, -1));
 
-        jTabbedPane1.addTab("tab1", jPanel1);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/artworks-AL425TG2qNymf0CP-fnmSIg-t500x500.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Menu Principal", PanelPrincipal);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnCrudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrudActionPerformed
+        abrir_crud();
+    }//GEN-LAST:event_BtnCrudActionPerformed
+
+    private void BtnGuardarCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarCRUDActionPerformed
+        String nombre = FieldNombre.getText();
+        String poder = FieldPoder.getText();
+        String debilidad = FieldDebilidad.getText();
+        int index = CBUniverso.getSelectedIndex();
+        String strFuerza = FieldFuerza.getText();
+        int fuerza = Integer.parseInt(strFuerza);
+        String strAgilidadF = FieldAgilidadF.getText();
+        int AgilFisica = Integer.parseInt(strAgilidadF);
+        String strAgilidadM = FieldAgilidadM.getText();
+        int AgilMental = Integer.parseInt(strAgilidadM);
+        String strVida = FieldHP.getText();
+        int vida = Integer.parseInt(strVida);
+        
+        
+        personajes.add(new Personaje(nombre, poder, debilidad, CBUniverso.getItemAt(index), fuerza, AgilFisica, AgilMental, vida));
+        JOptionPane.showMessageDialog(this, "Personaje agregado exitosamente");
+    }//GEN-LAST:event_BtnGuardarCRUDActionPerformed
+
+    private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
+        JOptionPane.showMessageDialog(this, "Saliendo de programa...");
+        System.exit(0);
+    }//GEN-LAST:event_BtnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,12 +266,40 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    public void abrir_crud (){
+        CRUD.pack();
+        CRUD.setLocationRelativeTo(this);
+        CRUD.setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnCrud;
+    private javax.swing.JButton BtnGuardarCRUD;
+    private javax.swing.JButton BtnListar;
+    private javax.swing.JButton BtnSalir;
+    private javax.swing.JButton BtnSimulacion;
+    private javax.swing.JComboBox<String> CBUniverso;
+    private javax.swing.JDialog CRUD;
+    private javax.swing.JTextField FieldAgilidadF;
+    private javax.swing.JTextField FieldAgilidadM;
+    private javax.swing.JTextField FieldDebilidad;
+    private javax.swing.JTextField FieldFuerza;
+    private javax.swing.JTextField FieldHP;
+    private javax.swing.JTextField FieldNombre;
+    private javax.swing.JTextField FieldPoder;
+    private javax.swing.JLabel ImagenCrud;
     private javax.swing.JLabel ImagenMenu;
+    private javax.swing.JLabel LbAgregar;
+    private javax.swing.JLabel LbDebilidad;
+    private javax.swing.JLabel LbFuerza;
+    private javax.swing.JLabel LbHP;
+    private javax.swing.JLabel LbNombre;
+    private javax.swing.JLabel LbPoder;
+    private javax.swing.JLabel LbUniverso;
+    private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
