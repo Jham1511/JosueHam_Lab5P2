@@ -34,8 +34,8 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         menu_popup = new javax.swing.JPopupMenu();
-        OpListar = new javax.swing.JMenuItem();
         OpListarNodo = new javax.swing.JMenuItem();
+        OpEliminar = new javax.swing.JMenuItem();
         CRUD = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         LbFuerza = new javax.swing.JLabel();
@@ -63,8 +63,12 @@ public class Principal extends javax.swing.JFrame {
         JTreePersonajes = new javax.swing.JScrollPane();
         jt_personajes = new javax.swing.JTree();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jl_personas = new javax.swing.JList();
+        jl_personajes = new javax.swing.JList();
         BtnFlecha = new javax.swing.JButton();
+        PopUpUniverso = new javax.swing.JPopupMenu();
+        ListarUniverso = new javax.swing.JMenuItem();
+        DiaSimulacion = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelPrincipal = new javax.swing.JPanel();
         BtnSalir = new javax.swing.JButton();
@@ -74,14 +78,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         ImagenMenu = new javax.swing.JLabel();
 
-        OpListar.setText("Listar Universo");
-        OpListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OpListarActionPerformed(evt);
-            }
-        });
-        menu_popup.add(OpListar);
-
         OpListarNodo.setText("Listar Nodo");
         OpListarNodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +85,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_popup.add(OpListarNodo);
+
+        OpEliminar.setText("Eliminar Nodo");
+        OpEliminar.setToolTipText("");
+        OpEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpEliminarActionPerformed(evt);
+            }
+        });
+        menu_popup.add(OpEliminar);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -216,8 +221,8 @@ public class Principal extends javax.swing.JFrame {
         });
         JTreePersonajes.setViewportView(jt_personajes);
 
-        jl_personas.setModel(new DefaultListModel());
-        jScrollPane1.setViewportView(jl_personas);
+        jl_personajes.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(jl_personajes);
 
         BtnFlecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/reply.png"))); // NOI18N
         BtnFlecha.setBorder(null);
@@ -266,6 +271,29 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        ListarUniverso.setText("Listar Universo");
+        ListarUniverso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarUniversoActionPerformed(evt);
+            }
+        });
+        PopUpUniverso.add(ListarUniverso);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/Marvel-Vs.-Capcom-Clash-of-__21658.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout DiaSimulacionLayout = new javax.swing.GroupLayout(DiaSimulacion.getContentPane());
+        DiaSimulacion.getContentPane().setLayout(DiaSimulacionLayout);
+        DiaSimulacionLayout.setHorizontalGroup(
+            DiaSimulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4)
+        );
+        DiaSimulacionLayout.setVerticalGroup(
+            DiaSimulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DiaSimulacionLayout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -304,6 +332,11 @@ public class Principal extends javax.swing.JFrame {
         BtnSimulacion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         BtnSimulacion.setText("Simulacion ");
         BtnSimulacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnSimulacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimulacionActionPerformed(evt);
+            }
+        });
         PanelPrincipal.add(BtnSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 160, 40));
 
         jLabel2.setBackground(new java.awt.Color(255, 0, 51));
@@ -396,19 +429,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void OpListarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarNodoActionPerformed
         DefaultListModel modelo
-                = (DefaultListModel) jl_personas.getModel();
-        int index = CBUniverso.getSelectedIndex();
-        String strAgilF = FieldAgilidadF.getText();
-        int AgilF = Integer.parseInt(strAgilF);
-        String strAgilM = FieldAgilidadM.getText();
-        int AgilM = Integer.parseInt(strAgilM);
-        String strFuerza = FieldFuerza.getText();
-        int fuerza = Integer.parseInt(strFuerza);
-        String strHp = FieldHP.getText();
-        int vida = Integer.parseInt(strHp);
-        modelo.addElement(new Personaje(FieldNombre.getText(), FieldPoder.getText(), FieldDebilidad.getText(), CBUniverso.getItemAt(index), AgilF, AgilM, fuerza, vida));
+                = (DefaultListModel) jl_personajes.getModel();
+        
+        modelo.addElement(personaje_seleccionada.toString());
 
-        jl_personas.setModel(modelo);
+        jl_personajes.setModel(modelo);
     }//GEN-LAST:event_OpListarNodoActionPerformed
 
     private void BtnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListarActionPerformed
@@ -430,31 +455,52 @@ public class Principal extends javax.swing.JFrame {
                     = jt_personajes.getSelectionPath().
                             getLastPathComponent();
             nodo_seleccionado = (DefaultMutableTreeNode) v1;
-            menu_popup.show(evt.getComponent(),
-                    evt.getX(), evt.getY());
+            
+
+            if (nodo_seleccionado.getUserObject().equals("DC") || nodo_seleccionado.getUserObject().equals("Marvel") || nodo_seleccionado.getUserObject().equals("Capcom") || nodo_seleccionado.getUserObject().equals("MortalKombat")) {
+                PopUpUniverso.show(evt.getComponent(), evt.getX(), evt.getY());
+            } else {
+                menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
+                personaje_seleccionada = (Personaje) nodo_seleccionado.getUserObject();
+            }
+            
         }
+
     }//GEN-LAST:event_jt_personajesMouseClicked
 
-    private void OpListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarActionPerformed
+    private void ListarUniversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarUniversoActionPerformed
         DefaultListModel modelo
-                = (DefaultListModel) jl_personas.getModel();
+                = (DefaultListModel) jl_personajes.getModel();
 
-        int index = CBUniverso.getSelectedIndex();
-        String strAgilF = FieldAgilidadF.getText();
-        int AgilF = Integer.parseInt(strAgilF);
-        String strAgilM = FieldAgilidadM.getText();
-        int AgilM = Integer.parseInt(strAgilM);
-        String strFuerza = FieldFuerza.getText();
-        int fuerza = Integer.parseInt(strFuerza);
-        String strHp = FieldHP.getText();
-        int vida = Integer.parseInt(strHp);
-        
         for (int i = 0; i < personajes.size(); i++) {
-            modelo.addElement(new Personaje(FieldNombre.getText(), FieldPoder.getText(), FieldDebilidad.getText(), CBUniverso.getItemAt(index), AgilF, AgilM, fuerza, vida));
+            modelo.addElement(personajes.get(i).toString());
         }
 
-        jl_personas.setModel(modelo);
-    }//GEN-LAST:event_OpListarActionPerformed
+        jl_personajes.setModel(modelo);
+
+    }//GEN-LAST:event_ListarUniversoActionPerformed
+
+    private void OpEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpEliminarActionPerformed
+        int response = JOptionPane.showConfirmDialog(
+                this,
+                "Seguro de Eliminar?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.OK_OPTION) {
+            DefaultTreeModel m
+                    = (DefaultTreeModel) jt_personajes.getModel();
+            m.removeNodeFromParent(
+                    nodo_seleccionado);
+            m.reload();
+            jl_personajes.setModel(new DefaultListModel());
+        }
+    }//GEN-LAST:event_OpEliminarActionPerformed
+
+    private void BtnSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimulacionActionPerformed
+
+    }//GEN-LAST:event_BtnSimulacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -524,6 +570,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton BtnSimulacion;
     private javax.swing.JComboBox<String> CBUniverso;
     private javax.swing.JDialog CRUD;
+    private javax.swing.JDialog DiaSimulacion;
     private javax.swing.JDialog DialogListar;
     private javax.swing.JTextField FieldAgilidadF;
     private javax.swing.JTextField FieldAgilidadM;
@@ -542,17 +589,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LbNombre;
     private javax.swing.JLabel LbPoder;
     private javax.swing.JLabel LbUniverso;
-    private javax.swing.JMenuItem OpListar;
+    private javax.swing.JMenuItem ListarUniverso;
+    private javax.swing.JMenuItem OpEliminar;
     private javax.swing.JMenuItem OpListarNodo;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JPopupMenu PopUpUniverso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JList jl_personas;
+    private javax.swing.JList jl_personajes;
     private javax.swing.JTree jt_personajes;
     private javax.swing.JPopupMenu menu_popup;
     // End of variables declaration//GEN-END:variables

@@ -92,7 +92,7 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "Nombre -> " + nombre 
+        return "\nNombre -> " + nombre 
                 + "\nPoder -> " + poder 
                 + "\nDebilidad ->" + debilidad 
                 + "\nUniverso -> " + universo 
