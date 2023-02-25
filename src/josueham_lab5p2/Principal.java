@@ -134,7 +134,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setText("Agilidad Fisica");
         jLabel3.setOpaque(true);
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+
+        FieldAgilidadM.setText("100");
         jPanel1.add(FieldAgilidadM, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 120, 30));
+
+        FieldFuerza.setText("250");
         jPanel1.add(FieldFuerza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 130, 30));
 
         LbNombre.setBackground(new java.awt.Color(204, 204, 204));
@@ -150,6 +154,8 @@ public class Principal extends javax.swing.JFrame {
         LbPoder.setText("Poder");
         LbPoder.setOpaque(true);
         jPanel1.add(LbPoder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        FieldNombre.setText("Batman");
         jPanel1.add(FieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 130, 30));
 
         LbHP.setBackground(new java.awt.Color(204, 204, 204));
@@ -158,6 +164,8 @@ public class Principal extends javax.swing.JFrame {
         LbHP.setText("HP");
         LbHP.setOpaque(true);
         jPanel1.add(LbHP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+
+        FieldHP.setText("300");
         jPanel1.add(FieldHP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 120, 30));
 
         LbUniverso.setBackground(new java.awt.Color(204, 204, 204));
@@ -184,7 +192,11 @@ public class Principal extends javax.swing.JFrame {
 
         CBUniverso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Mortal Kombat", "Capcom" }));
         jPanel1.add(CBUniverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 110, -1));
+
+        FieldAgilidadF.setText("200");
         jPanel1.add(FieldAgilidadF, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 120, 30));
+
+        FieldDebilidad.setText("Soledad");
         jPanel1.add(FieldDebilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 130, 30));
 
         LbDebilidad.setBackground(new java.awt.Color(204, 204, 204));
@@ -193,6 +205,8 @@ public class Principal extends javax.swing.JFrame {
         LbDebilidad.setText("Debilidad");
         LbDebilidad.setOpaque(true);
         jPanel1.add(LbDebilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
+
+        FieldPoder.setText("Dinero");
         jPanel1.add(FieldPoder, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 130, 30));
 
         ImagenCrud.setBackground(new java.awt.Color(102, 102, 102));
@@ -280,9 +294,9 @@ public class Principal extends javax.swing.JFrame {
         );
 
         ListarUniverso.setText("Listar Universo");
-        ListarUniverso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ListarUniversoActionPerformed(evt);
+        ListarUniverso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarUniversoMouseClicked(evt);
             }
         });
         PopUpUniverso.add(ListarUniverso);
@@ -425,30 +439,30 @@ public class Principal extends javax.swing.JFrame {
         DefaultMutableTreeNode raiz
                 = (DefaultMutableTreeNode) m.getRoot();
 
-        DefaultMutableTreeNode nodo_perso;
+        DefaultMutableTreeNode nodo_perso = new DefaultMutableTreeNode();
 
         for (Personaje p : personajes) {
             switch (p.getUniverso()) {
                 case "DC": {
-                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    nodo_perso = new DefaultMutableTreeNode(p);
                     ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
                 }
                 break;
 
                 case "Marvel": {
-                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    nodo_perso = new DefaultMutableTreeNode(p);
                     ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
                 }
                 break;
 
                 case "Mortal Kombat": {
-                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    nodo_perso = new DefaultMutableTreeNode(p);
                     ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
                 }
                 break;
 
                 case "Capcom": {
-                    nodo_perso = new DefaultMutableTreeNode(p.getNombre());
+                    nodo_perso = new DefaultMutableTreeNode(p);
                     ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
                 }
                 break;
@@ -491,47 +505,19 @@ public class Principal extends javax.swing.JFrame {
     private void jt_personajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_personajesMouseClicked
 
         if (evt.isMetaDown()) {
-            int row = jt_personajes.getClosestRowForLocation(
-                    evt.getX(), evt.getY());
+            int row = jt_personajes.getClosestRowForLocation(evt.getX(), evt.getY());
             jt_personajes.setSelectionRow(row);
-            Object v1
-                    = jt_personajes.getSelectionPath().
-                            getLastPathComponent();
-            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
 
             if (nodo_seleccionado.getUserObject().equals("DC") || nodo_seleccionado.getUserObject().equals("Marvel") || nodo_seleccionado.getUserObject().equals("Capcom") || nodo_seleccionado.getUserObject().equals("MortalKombat")) {
                 PopUpUniverso.show(evt.getComponent(), evt.getX(), evt.getY());
             } else {
-                personaje_seleccionada = (Personaje) nodo_seleccionado.getUserObject();
+                menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
             }
 
         }
 
     }//GEN-LAST:event_jt_personajesMouseClicked
-
-    private void ListarUniversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarUniversoActionPerformed
-        DefaultListModel modelo
-                = (DefaultListModel) jl_personajes.getModel();
-
-        for (int i = 0; i < personajes.size(); i++) {
-            if (nodo_seleccionado.getUserObject().equals("DC")) {
-                modelo.addElement(personajes.get(i).toString());
-            }
-
-            if (nodo_seleccionado.getUserObject().equals("Marvel")) {
-                modelo.addElement(personajes.get(i).toString());
-            }
-            if (nodo_seleccionado.getUserObject().equals("Mortal Kombat")) {
-                modelo.addElement(personajes.get(i).toString());
-            }
-            if (nodo_seleccionado.getUserObject().equals("Capcom")) {
-                modelo.addElement(personajes.get(i).toString());
-            }
-        }
-
-        jl_personajes.setModel(modelo);
-
-    }//GEN-LAST:event_ListarUniversoActionPerformed
 
     private void OpEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpEliminarActionPerformed
         int response = JOptionPane.showConfirmDialog(
@@ -544,11 +530,12 @@ public class Principal extends javax.swing.JFrame {
         if (response == JOptionPane.OK_OPTION) {
             DefaultTreeModel m
                     = (DefaultTreeModel) jt_personajes.getModel();
-            m.removeNodeFromParent(
-                    nodo_seleccionado);
+            m.removeNodeFromParent(nodo_seleccionado);
+            personajes.remove((Personaje)nodo_seleccionado.getUserObject());
             m.reload();
             jl_personajes.setModel(new DefaultListModel());
         }
+        
     }//GEN-LAST:event_OpEliminarActionPerformed
 
     private void BtnSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimulacionActionPerformed
@@ -571,6 +558,22 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(true);
         DiaSimulacion.setVisible(false);
     }//GEN-LAST:event_BtnAtrasActionPerformed
+
+    private void ListarUniversoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarUniversoMouseClicked
+       DefaultListModel modelo = new DefaultListModel() ;
+
+        if (evt.isMetaDown()) {
+            int row = jt_personajes.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_personajes.setSelectionRow(row);
+            nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
+            for (Personaje p : personajes) {
+                if (p.getUniverso().equals(nodo_seleccionado.toString())) {
+                    modelo.addElement(p);
+                }
+            }
+        }
+            jl_personajes.setModel(modelo);
+    }//GEN-LAST:event_ListarUniversoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -682,5 +685,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu menu_popup;
     // End of variables declaration//GEN-END:variables
 DefaultMutableTreeNode nodo_seleccionado;
-    Personaje personaje_seleccionada;
+    Personaje personaje_seleccionada = new Personaje();
 }
