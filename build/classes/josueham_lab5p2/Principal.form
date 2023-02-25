@@ -8,14 +8,6 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="OpListarNodo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Listar Nodo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OpListarNodoActionPerformed"/>
-          </Events>
-        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="OpEliminar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar Nodo"/>
@@ -472,22 +464,6 @@
             </Component>
           </SubComponents>
         </Container>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPopupMenu" name="PopUpUniverso">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="ListarUniverso">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Listar Universo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ListarUniversoMouseClicked"/>
-          </Events>
-        </MenuItem>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="DiaSimulacion">

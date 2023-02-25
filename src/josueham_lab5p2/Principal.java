@@ -36,7 +36,6 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         menu_popup = new javax.swing.JPopupMenu();
-        OpListarNodo = new javax.swing.JMenuItem();
         OpEliminar = new javax.swing.JMenuItem();
         CRUD = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
@@ -67,8 +66,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_personajes = new javax.swing.JList();
         BtnFlecha = new javax.swing.JButton();
-        PopUpUniverso = new javax.swing.JPopupMenu();
-        ListarUniverso = new javax.swing.JMenuItem();
         DiaSimulacion = new javax.swing.JDialog();
         cb_jugador1 = new javax.swing.JComboBox<>();
         cb_jugador2 = new javax.swing.JComboBox<>();
@@ -87,14 +84,6 @@ public class Principal extends javax.swing.JFrame {
         BtnSimulacion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         ImagenMenu = new javax.swing.JLabel();
-
-        OpListarNodo.setText("Listar Nodo");
-        OpListarNodo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OpListarNodoActionPerformed(evt);
-            }
-        });
-        menu_popup.add(OpListarNodo);
 
         OpEliminar.setText("Eliminar Nodo");
         OpEliminar.setToolTipText("");
@@ -295,14 +284,6 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        ListarUniverso.setText("Listar Universo");
-        ListarUniverso.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ListarUniversoMouseClicked(evt);
-            }
-        });
-        PopUpUniverso.add(ListarUniverso);
-
         DiaSimulacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cb_jugador1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -486,15 +467,6 @@ public class Principal extends javax.swing.JFrame {
         CRUD.setVisible(false);
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
-    private void OpListarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarNodoActionPerformed
-        DefaultListModel modelo
-                = (DefaultListModel) jl_personajes.getModel();
-
-        modelo.addElement(personaje_seleccionada.toString());
-
-        jl_personajes.setModel(modelo);
-    }//GEN-LAST:event_OpListarNodoActionPerformed
-
     private void BtnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListarActionPerformed
         abrir_universos();
     }//GEN-LAST:event_BtnListarActionPerformed
@@ -510,12 +482,23 @@ public class Principal extends javax.swing.JFrame {
             int row = jt_personajes.getClosestRowForLocation(evt.getX(), evt.getY());
             jt_personajes.setSelectionRow(row);
             nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
+            DefaultListModel modelo = new DefaultListModel();
             if (nodo_seleccionado.toString().equals("DC") || nodo_seleccionado.getUserObject().equals("Marvel") || nodo_seleccionado.getUserObject().equals("Capcom") || nodo_seleccionado.getUserObject().equals("MortalKombat")) {
-                PopUpUniverso.show(evt.getComponent(), evt.getX(), evt.getY());
+              
+
+                for (Personaje p : personajes) {
+                    if (p.getUniverso().equals(nodo_seleccionado.toString())) {
+                        modelo.addElement(p);
+                    }
+                }
+
             } else {
                 menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
-            }
 
+                modelo.addElement(nodo_seleccionado.toString());
+
+            }
+            jl_personajes.setModel(modelo);
         }
 
     }//GEN-LAST:event_jt_personajesMouseClicked
@@ -561,26 +544,6 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(true);
         DiaSimulacion.setVisible(false);
     }//GEN-LAST:event_BtnAtrasActionPerformed
-
-    private void ListarUniversoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarUniversoMouseClicked
-        DefaultListModel modelo = new DefaultListModel();
-
-        if (evt.isMetaDown()) {
-            DefaultTreeModel modelito = (DefaultTreeModel) jt_personajes.getModel();
-           
-            int row = jt_personajes.getClosestRowForLocation(evt.getX(), evt.getY());
-            System.out.println(row);
-            jt_personajes.setSelectionRow(row);
-            nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
-            System.out.println(nodo_seleccionado.toString());
-            for (Personaje p : personajes) {
-                if (p.getUniverso().equals(nodo_seleccionado.toString())) {
-                    modelo.addElement(p);
-                }
-            }
-        }
-        jl_personajes.setModel(modelo);
-    }//GEN-LAST:event_ListarUniversoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -672,7 +635,7 @@ public class Principal extends javax.swing.JFrame {
         raiz.add(capcom);
         raiz.add(mortal);
         DefaultTreeModel m = new DefaultTreeModel(raiz);
-        
+
         jt_personajes.setModel(m);
 
     }
@@ -729,11 +692,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LbNombre;
     private javax.swing.JLabel LbPoder;
     private javax.swing.JLabel LbUniverso;
-    private javax.swing.JMenuItem ListarUniverso;
     private javax.swing.JMenuItem OpEliminar;
-    private javax.swing.JMenuItem OpListarNodo;
     private javax.swing.JPanel PanelPrincipal;
-    private javax.swing.JPopupMenu PopUpUniverso;
     private javax.swing.JComboBox<String> cb_jugador1;
     private javax.swing.JComboBox<String> cb_jugador2;
     private javax.swing.JLabel jLabel1;
