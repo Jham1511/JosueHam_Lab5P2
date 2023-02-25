@@ -68,7 +68,15 @@ public class Principal extends javax.swing.JFrame {
         PopUpUniverso = new javax.swing.JPopupMenu();
         ListarUniverso = new javax.swing.JMenuItem();
         DiaSimulacion = new javax.swing.JDialog();
-        jLabel4 = new javax.swing.JLabel();
+        cb_jugador1 = new javax.swing.JComboBox<>();
+        cb_jugador2 = new javax.swing.JComboBox<>();
+        BtnResistencia = new javax.swing.JButton();
+        BtnAtaqM = new javax.swing.JButton();
+        BtnAtaqueF = new javax.swing.JButton();
+        BtnAtras = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        AreaBatalla = new javax.swing.JTextArea();
+        Imagen = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelPrincipal = new javax.swing.JPanel();
         BtnSalir = new javax.swing.JButton();
@@ -279,20 +287,55 @@ public class Principal extends javax.swing.JFrame {
         });
         PopUpUniverso.add(ListarUniverso);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/Marvel-Vs.-Capcom-Clash-of-__21658.jpg"))); // NOI18N
+        DiaSimulacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout DiaSimulacionLayout = new javax.swing.GroupLayout(DiaSimulacion.getContentPane());
-        DiaSimulacion.getContentPane().setLayout(DiaSimulacionLayout);
-        DiaSimulacionLayout.setHorizontalGroup(
-            DiaSimulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4)
-        );
-        DiaSimulacionLayout.setVerticalGroup(
-            DiaSimulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DiaSimulacionLayout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        cb_jugador1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DiaSimulacion.getContentPane().add(cb_jugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 90, 30));
+
+        cb_jugador2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DiaSimulacion.getContentPane().add(cb_jugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 90, 30));
+
+        BtnResistencia.setText("Resistencia");
+        BtnResistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnResistenciaActionPerformed(evt);
+            }
+        });
+        DiaSimulacion.getContentPane().add(BtnResistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, -1, -1));
+
+        BtnAtaqM.setText("Ataque Mental");
+        BtnAtaqM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAtaqMActionPerformed(evt);
+            }
+        });
+        DiaSimulacion.getContentPane().add(BtnAtaqM, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, -1, -1));
+
+        BtnAtaqueF.setText("Ataque Fisico");
+        BtnAtaqueF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAtaqueFActionPerformed(evt);
+            }
+        });
+        DiaSimulacion.getContentPane().add(BtnAtaqueF, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
+
+        BtnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/reply.png"))); // NOI18N
+        BtnAtras.setOpaque(false);
+        BtnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAtrasActionPerformed(evt);
+            }
+        });
+        DiaSimulacion.getContentPane().add(BtnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 50));
+
+        AreaBatalla.setColumns(20);
+        AreaBatalla.setRows(5);
+        jScrollPane2.setViewportView(AreaBatalla);
+
+        DiaSimulacion.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 420, 130));
+
+        Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/Marvel-Vs.-Capcom-Clash-of-__21658.jpg"))); // NOI18N
+        DiaSimulacion.getContentPane().add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -430,7 +473,7 @@ public class Principal extends javax.swing.JFrame {
     private void OpListarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarNodoActionPerformed
         DefaultListModel modelo
                 = (DefaultListModel) jl_personajes.getModel();
-        
+
         modelo.addElement(personaje_seleccionada.toString());
 
         jl_personajes.setModel(modelo);
@@ -455,15 +498,13 @@ public class Principal extends javax.swing.JFrame {
                     = jt_personajes.getSelectionPath().
                             getLastPathComponent();
             nodo_seleccionado = (DefaultMutableTreeNode) v1;
-            
 
             if (nodo_seleccionado.getUserObject().equals("DC") || nodo_seleccionado.getUserObject().equals("Marvel") || nodo_seleccionado.getUserObject().equals("Capcom") || nodo_seleccionado.getUserObject().equals("MortalKombat")) {
                 PopUpUniverso.show(evt.getComponent(), evt.getX(), evt.getY());
             } else {
-                menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
                 personaje_seleccionada = (Personaje) nodo_seleccionado.getUserObject();
             }
-            
+
         }
 
     }//GEN-LAST:event_jt_personajesMouseClicked
@@ -473,7 +514,19 @@ public class Principal extends javax.swing.JFrame {
                 = (DefaultListModel) jl_personajes.getModel();
 
         for (int i = 0; i < personajes.size(); i++) {
-            modelo.addElement(personajes.get(i).toString());
+            if (nodo_seleccionado.getUserObject().equals("DC")) {
+                modelo.addElement(personajes.get(i).toString());
+            }
+
+            if (nodo_seleccionado.getUserObject().equals("Marvel")) {
+                modelo.addElement(personajes.get(i).toString());
+            }
+            if (nodo_seleccionado.getUserObject().equals("Mortal Kombat")) {
+                modelo.addElement(personajes.get(i).toString());
+            }
+            if (nodo_seleccionado.getUserObject().equals("Capcom")) {
+                modelo.addElement(personajes.get(i).toString());
+            }
         }
 
         jl_personajes.setModel(modelo);
@@ -499,8 +552,25 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_OpEliminarActionPerformed
 
     private void BtnSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimulacionActionPerformed
-
+        abrir_simu();
     }//GEN-LAST:event_BtnSimulacionActionPerformed
+
+    private void BtnResistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResistenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnResistenciaActionPerformed
+
+    private void BtnAtaqueFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtaqueFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAtaqueFActionPerformed
+
+    private void BtnAtaqMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtaqMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAtaqMActionPerformed
+
+    private void BtnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtrasActionPerformed
+        this.setVisible(true);
+        DiaSimulacion.setVisible(false);
+    }//GEN-LAST:event_BtnAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -551,21 +621,23 @@ public class Principal extends javax.swing.JFrame {
         DialogListar.setVisible(true);
     }
 
-    public String impUni() {
-        String cadena = "";
-        for (Personaje personaje : personajes) {
-            if (personaje instanceof Personaje) {
-                cadena += personajes.indexOf(personaje) + "- " + personaje + "\n";
-            }
-        }
-        return cadena;
+    public void abrir_simu() {
+        DiaSimulacion.pack();
+        DiaSimulacion.setLocationRelativeTo(this);
+        this.setVisible(false);
+        DiaSimulacion.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea AreaBatalla;
+    private javax.swing.JButton BtnAtaqM;
+    private javax.swing.JButton BtnAtaqueF;
+    private javax.swing.JButton BtnAtras;
     private javax.swing.JButton BtnCrud;
     private javax.swing.JButton BtnFlecha;
     private javax.swing.JButton BtnGuardarCRUD;
     private javax.swing.JButton BtnListar;
     private javax.swing.JButton BtnRegresar;
+    private javax.swing.JButton BtnResistencia;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JButton BtnSimulacion;
     private javax.swing.JComboBox<String> CBUniverso;
@@ -579,6 +651,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField FieldHP;
     private javax.swing.JTextField FieldNombre;
     private javax.swing.JTextField FieldPoder;
+    private javax.swing.JLabel Imagen;
     private javax.swing.JLabel ImagenCrud;
     private javax.swing.JLabel ImagenMenu;
     private javax.swing.JScrollPane JTreePersonajes;
@@ -594,13 +667,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem OpListarNodo;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPopupMenu PopUpUniverso;
+    private javax.swing.JComboBox<String> cb_jugador1;
+    private javax.swing.JComboBox<String> cb_jugador2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList jl_personajes;
     private javax.swing.JTree jt_personajes;
