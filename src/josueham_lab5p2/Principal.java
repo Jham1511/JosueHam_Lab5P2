@@ -510,8 +510,7 @@ public class Principal extends javax.swing.JFrame {
             int row = jt_personajes.getClosestRowForLocation(evt.getX(), evt.getY());
             jt_personajes.setSelectionRow(row);
             nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
-
-            if (nodo_seleccionado.getUserObject().equals("DC") || nodo_seleccionado.getUserObject().equals("Marvel") || nodo_seleccionado.getUserObject().equals("Capcom") || nodo_seleccionado.getUserObject().equals("MortalKombat")) {
+            if (nodo_seleccionado.toString().equals("DC") || nodo_seleccionado.getUserObject().equals("Marvel") || nodo_seleccionado.getUserObject().equals("Capcom") || nodo_seleccionado.getUserObject().equals("MortalKombat")) {
                 PopUpUniverso.show(evt.getComponent(), evt.getX(), evt.getY());
             } else {
                 menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
@@ -542,6 +541,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimulacionActionPerformed
         abrir_simu();
+        llenar_combobox1();
+        llenar_combobox2();
     }//GEN-LAST:event_BtnSimulacionActionPerformed
 
     private void BtnResistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResistenciaActionPerformed
@@ -571,6 +572,7 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(row);
             jt_personajes.setSelectionRow(row);
             nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
+            System.out.println(nodo_seleccionado.toString());
             for (Personaje p : personajes) {
                 if (p.getUniverso().equals(nodo_seleccionado.toString())) {
                     modelo.addElement(p);
@@ -746,6 +748,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTree jt_personajes;
     private javax.swing.JPopupMenu menu_popup;
     // End of variables declaration//GEN-END:variables
-DefaultMutableTreeNode nodo_seleccionado;
+DefaultMutableTreeNode nodo_seleccionado = new DefaultMutableTreeNode();
     Personaje personaje_seleccionada = new Personaje();
 }
