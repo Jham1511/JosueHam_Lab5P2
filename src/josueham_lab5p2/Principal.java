@@ -5,8 +5,10 @@
 package josueham_lab5p2;
 
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -18,7 +20,7 @@ import javax.swing.tree.DefaultTreeModel;
 public class Principal extends javax.swing.JFrame {
 
     ArrayList<Personaje> personajes = new ArrayList();
-
+    Random aleatorio = new Random();
     public Principal() {
         initComponents();
         this.setSize(510, 550);
@@ -69,9 +71,13 @@ public class Principal extends javax.swing.JFrame {
         DiaSimulacion = new javax.swing.JDialog();
         cb_jugador1 = new javax.swing.JComboBox<>();
         cb_jugador2 = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jl_jogador2 = new javax.swing.JList<>();
         BtnResistencia = new javax.swing.JButton();
         BtnAtaqM = new javax.swing.JButton();
         BtnAtaqueF = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jl_jogador1 = new javax.swing.JList<>();
         BtnAtras = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         AreaBatalla = new javax.swing.JTextArea();
@@ -286,11 +292,26 @@ public class Principal extends javax.swing.JFrame {
 
         DiaSimulacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cb_jugador1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        DiaSimulacion.getContentPane().add(cb_jugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 90, 30));
+        cb_jugador1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Mortal Kombat", "Capcom" }));
+        cb_jugador1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_jugador1ItemStateChanged(evt);
+            }
+        });
+        DiaSimulacion.getContentPane().add(cb_jugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 90, 30));
 
-        cb_jugador2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        DiaSimulacion.getContentPane().add(cb_jugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 90, 30));
+        cb_jugador2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DC", "Marvel", "Mortal Kombat", "Capcom" }));
+        cb_jugador2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_jugador2ItemStateChanged(evt);
+            }
+        });
+        DiaSimulacion.getContentPane().add(cb_jugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 90, 30));
+
+        jl_jogador2.setModel(new DefaultListModel());
+        jScrollPane4.setViewportView(jl_jogador2);
+
+        DiaSimulacion.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 90, -1));
 
         BtnResistencia.setText("Resistencia");
         BtnResistencia.addActionListener(new java.awt.event.ActionListener() {
@@ -298,7 +319,7 @@ public class Principal extends javax.swing.JFrame {
                 BtnResistenciaActionPerformed(evt);
             }
         });
-        DiaSimulacion.getContentPane().add(BtnResistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, -1, -1));
+        DiaSimulacion.getContentPane().add(BtnResistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
 
         BtnAtaqM.setText("Ataque Mental");
         BtnAtaqM.addActionListener(new java.awt.event.ActionListener() {
@@ -306,15 +327,20 @@ public class Principal extends javax.swing.JFrame {
                 BtnAtaqMActionPerformed(evt);
             }
         });
-        DiaSimulacion.getContentPane().add(BtnAtaqM, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, -1, -1));
+        DiaSimulacion.getContentPane().add(BtnAtaqM, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
 
         BtnAtaqueF.setText("Ataque Fisico");
-        BtnAtaqueF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAtaqueFActionPerformed(evt);
+        BtnAtaqueF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnAtaqueFMouseClicked(evt);
             }
         });
-        DiaSimulacion.getContentPane().add(BtnAtaqueF, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
+        DiaSimulacion.getContentPane().add(BtnAtaqueF, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+
+        jl_jogador1.setModel(new DefaultListModel());
+        jScrollPane3.setViewportView(jl_jogador1);
+
+        DiaSimulacion.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 90, -1));
 
         BtnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/reply.png"))); // NOI18N
         BtnAtras.setOpaque(false);
@@ -329,7 +355,7 @@ public class Principal extends javax.swing.JFrame {
         AreaBatalla.setRows(5);
         jScrollPane2.setViewportView(AreaBatalla);
 
-        DiaSimulacion.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 420, 130));
+        DiaSimulacion.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 420, 130));
 
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/josueham_lab5p2/Marvel-Vs.-Capcom-Clash-of-__21658.jpg"))); // NOI18N
         DiaSimulacion.getContentPane().add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -524,17 +550,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimulacionActionPerformed
         abrir_simu();
-        llenar_combobox1();
-        llenar_combobox2();
     }//GEN-LAST:event_BtnSimulacionActionPerformed
 
     private void BtnResistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResistenciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnResistenciaActionPerformed
-
-    private void BtnAtaqueFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtaqueFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnAtaqueFActionPerformed
 
     private void BtnAtaqMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtaqMActionPerformed
         // TODO add your handling code here:
@@ -544,6 +564,31 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(true);
         DiaSimulacion.setVisible(false);
     }//GEN-LAST:event_BtnAtrasActionPerformed
+
+    private void BtnAtaqueFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAtaqueFMouseClicked
+      Personaje jugador1 = (Personaje) cb_jugador1.getSelectedItem();
+      Personaje jugador2 = (Personaje) cb_jugador2.getSelectedItem();
+      
+      double danio = 0.33/1;
+      int chance = aleatorio.nextInt(8);
+      int vidaAct1 = jugador1.getHp();
+      int vidaAct2 = jugador2.getHp();
+        if (chance == 1) {
+            jugador1.setHp((int) (vidaAct1 + 0.08));
+        }
+       
+        
+      AreaBatalla.setText("Jugador 1 utilizó un ataque fisico "
+                    );
+    }//GEN-LAST:event_BtnAtaqueFMouseClicked
+
+    private void cb_jugador1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_jugador1ItemStateChanged
+        jl_jogador1.setModel(llenarLista(cb_jugador1.getSelectedItem().toString()));
+    }//GEN-LAST:event_cb_jugador1ItemStateChanged
+
+    private void cb_jugador2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_jugador2ItemStateChanged
+        jl_jogador2.setModel(llenarLista(cb_jugador2.getSelectedItem().toString()));
+    }//GEN-LAST:event_cb_jugador2ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -640,22 +685,14 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
-    public void llenar_combobox1() {
-        DefaultComboBoxModel modelito = new DefaultComboBoxModel();
-
-        for (Personaje p : personajes) {
-            modelito.addElement(p);
+    public DefaultListModel llenarLista(String universo){
+        DefaultListModel modelito = new DefaultListModel();
+         for (Personaje p : personajes) {
+             if (p.getUniverso().equals(universo)) {
+                 modelito.addElement(p);
+             }
         }
-        cb_jugador1.setModel(modelito);
-    }
-
-    public void llenar_combobox2() {
-        DefaultComboBoxModel modelito = new DefaultComboBoxModel();
-
-        for (Personaje p : personajes) {
-            modelito.addElement(p);
-        }
-        cb_jugador2.setModel(modelito);
+         return modelito;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AreaBatalla;
@@ -703,7 +740,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList<String> jl_jogador1;
+    private javax.swing.JList<String> jl_jogador2;
     private javax.swing.JList jl_personajes;
     private javax.swing.JTree jt_personajes;
     private javax.swing.JPopupMenu menu_popup;
