@@ -5,6 +5,7 @@
 package josueham_lab5p2;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setSize(510, 550);
         this.setLocationRelativeTo(null);
+        actualizar_arbol();
     }
 
     /**
@@ -433,44 +435,44 @@ public class Principal extends javax.swing.JFrame {
         int vida = Integer.parseInt(strVida);
 
         personajes.add(new Personaje(nombre, poder, debilidad, CBUniverso.getItemAt(index), fuerza, AgilFisica, AgilMental, vida));
-
-        DefaultTreeModel m = (DefaultTreeModel) jt_personajes.getModel();
-
-        DefaultMutableTreeNode raiz
-                = (DefaultMutableTreeNode) m.getRoot();
-
-        DefaultMutableTreeNode nodo_perso = new DefaultMutableTreeNode();
-
-        for (Personaje p : personajes) {
-            switch (p.getUniverso()) {
-                case "DC": {
-                    nodo_perso = new DefaultMutableTreeNode(p);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
-                }
-                break;
-
-                case "Marvel": {
-                    nodo_perso = new DefaultMutableTreeNode(p);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
-                }
-                break;
-
-                case "Mortal Kombat": {
-                    nodo_perso = new DefaultMutableTreeNode(p);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
-                }
-                break;
-
-                case "Capcom": {
-                    nodo_perso = new DefaultMutableTreeNode(p);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
-                }
-                break;
-            }
-
-            m.reload();
-
-        }
+        actualizar_arbol();
+//        DefaultTreeModel m = (DefaultTreeModel) jt_personajes.getModel();
+//
+//        DefaultMutableTreeNode raiz
+//                = (DefaultMutableTreeNode) m.getRoot();
+//
+//        DefaultMutableTreeNode nodo_perso = new DefaultMutableTreeNode();
+//
+//        for (Personaje p : personajes) {
+//            switch (p.getUniverso()) {
+//                case "DC": {
+//                    nodo_perso = new DefaultMutableTreeNode(p);
+//                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+//                }
+//                break;
+//
+//                case "Marvel": {
+//                    nodo_perso = new DefaultMutableTreeNode(p);
+//                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+//                }
+//                break;
+//
+//                case "Mortal Kombat": {
+//                    nodo_perso = new DefaultMutableTreeNode(p);
+//                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+//                }
+//                break;
+//
+//                case "Capcom": {
+//                    nodo_perso = new DefaultMutableTreeNode(p);
+//                    ((DefaultMutableTreeNode) raiz.getChildAt(index)).add(nodo_perso);
+//                }
+//                break;
+//            }
+//
+//            m.reload();
+//
+//        }
         JOptionPane.showMessageDialog(this, "Personaje agregado exitosamente");
     }//GEN-LAST:event_BtnGuardarCRUDActionPerformed
 
@@ -531,11 +533,11 @@ public class Principal extends javax.swing.JFrame {
             DefaultTreeModel m
                     = (DefaultTreeModel) jt_personajes.getModel();
             m.removeNodeFromParent(nodo_seleccionado);
-            personajes.remove((Personaje)nodo_seleccionado.getUserObject());
+            personajes.remove((Personaje) nodo_seleccionado.getUserObject());
             m.reload();
             jl_personajes.setModel(new DefaultListModel());
         }
-        
+
     }//GEN-LAST:event_OpEliminarActionPerformed
 
     private void BtnSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimulacionActionPerformed
@@ -560,10 +562,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAtrasActionPerformed
 
     private void ListarUniversoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarUniversoMouseClicked
-       DefaultListModel modelo = new DefaultListModel() ;
+        DefaultListModel modelo = new DefaultListModel();
 
         if (evt.isMetaDown()) {
+            DefaultTreeModel modelito = (DefaultTreeModel) jt_personajes.getModel();
+           
             int row = jt_personajes.getClosestRowForLocation(evt.getX(), evt.getY());
+            System.out.println(row);
             jt_personajes.setSelectionRow(row);
             nodo_seleccionado = (DefaultMutableTreeNode) jt_personajes.getSelectionPath().getLastPathComponent();
             for (Personaje p : personajes) {
@@ -572,7 +577,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
-            jl_personajes.setModel(modelo);
+        jl_personajes.setModel(modelo);
     }//GEN-LAST:event_ListarUniversoMouseClicked
 
     /**
@@ -629,6 +634,63 @@ public class Principal extends javax.swing.JFrame {
         DiaSimulacion.setLocationRelativeTo(this);
         this.setVisible(false);
         DiaSimulacion.setVisible(true);
+    }
+
+    public void actualizar_arbol() {
+
+        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Personajes");
+
+        DefaultMutableTreeNode dc = new DefaultMutableTreeNode("DC"),
+                marvel = new DefaultMutableTreeNode("Marvel"), capcom = new DefaultMutableTreeNode("Capcom"), mortal = new DefaultMutableTreeNode("Mortal Kombat");
+
+        for (Personaje p : personajes) {
+            DefaultMutableTreeNode nodoPer = new DefaultMutableTreeNode(p);
+            switch (p.getUniverso()) {
+                case "DC": {
+                    dc.add(nodoPer);
+                }
+                break;
+                case "Marvel": {
+                    marvel.add(nodoPer);
+                }
+                break;
+                case "Capcom": {
+                    capcom.add(nodoPer);
+                }
+                break;
+                case "Mortal Kombat": {
+                    mortal.add(nodoPer);
+                }
+                break;
+            }
+        }
+
+        raiz.add(dc);
+        raiz.add(marvel);
+        raiz.add(capcom);
+        raiz.add(mortal);
+        DefaultTreeModel m = new DefaultTreeModel(raiz);
+        
+        jt_personajes.setModel(m);
+
+    }
+
+    public void llenar_combobox1() {
+        DefaultComboBoxModel modelito = new DefaultComboBoxModel();
+
+        for (Personaje p : personajes) {
+            modelito.addElement(p);
+        }
+        cb_jugador1.setModel(modelito);
+    }
+
+    public void llenar_combobox2() {
+        DefaultComboBoxModel modelito = new DefaultComboBoxModel();
+
+        for (Personaje p : personajes) {
+            modelito.addElement(p);
+        }
+        cb_jugador2.setModel(modelito);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AreaBatalla;
