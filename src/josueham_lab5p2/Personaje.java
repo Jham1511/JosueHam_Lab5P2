@@ -23,10 +23,6 @@ public class Personaje {
         this.hp = hp;
     }
 
-    public Personaje(String nombre) {
-        this.nombre = nombre;
-    }
-
     public Personaje() {
     }
 
@@ -96,7 +92,7 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "\nNombre -> " + nombre 
+        return "Nombre -> " + nombre 
                 + "\nPoder -> " + poder 
                 + "\nDebilidad ->" + debilidad 
                 + "\nUniverso -> " + universo 

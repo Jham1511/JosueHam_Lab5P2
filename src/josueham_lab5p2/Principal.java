@@ -33,6 +33,9 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menu_popup = new javax.swing.JPopupMenu();
+        OpListar = new javax.swing.JMenuItem();
+        OpListarNodo = new javax.swing.JMenuItem();
         CRUD = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         LbFuerza = new javax.swing.JLabel();
@@ -62,9 +65,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_personas = new javax.swing.JList();
         BtnFlecha = new javax.swing.JButton();
-        menu_popup = new javax.swing.JPopupMenu();
-        OpListar = new javax.swing.JMenuItem();
-        opcion_modificar = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PanelPrincipal = new javax.swing.JPanel();
         BtnSalir = new javax.swing.JButton();
@@ -73,6 +73,22 @@ public class Principal extends javax.swing.JFrame {
         BtnSimulacion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         ImagenMenu = new javax.swing.JLabel();
+
+        OpListar.setText("Listar Universo");
+        OpListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpListarActionPerformed(evt);
+            }
+        });
+        menu_popup.add(OpListar);
+
+        OpListarNodo.setText("Listar Nodo");
+        OpListarNodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpListarNodoActionPerformed(evt);
+            }
+        });
+        menu_popup.add(OpListarNodo);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -250,17 +266,6 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        OpListar.setText("eliminar persona");
-        menu_popup.add(OpListar);
-
-        opcion_modificar.setText("modificar nombre");
-        opcion_modificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcion_modificarActionPerformed(evt);
-            }
-        });
-        menu_popup.add(opcion_modificar);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -338,7 +343,7 @@ public class Principal extends javax.swing.JFrame {
         int vida = Integer.parseInt(strVida);
 
         personajes.add(new Personaje(nombre, poder, debilidad, CBUniverso.getItemAt(index), fuerza, AgilFisica, AgilMental, vida));
-        
+
         DefaultTreeModel m = (DefaultTreeModel) jt_personajes.getModel();
 
         DefaultMutableTreeNode raiz
@@ -375,8 +380,7 @@ public class Principal extends javax.swing.JFrame {
 
             m.reload();
 
-           
-    }
+        }
         JOptionPane.showMessageDialog(this, "Personaje agregado exitosamente");
     }//GEN-LAST:event_BtnGuardarCRUDActionPerformed
 
@@ -390,15 +394,22 @@ public class Principal extends javax.swing.JFrame {
         CRUD.setVisible(false);
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
-    private void opcion_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcion_modificarActionPerformed
-        // TODO add your handling code here:
+    private void OpListarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarNodoActionPerformed
+        DefaultListModel modelo
+                = (DefaultListModel) jl_personas.getModel();
+        int index = CBUniverso.getSelectedIndex();
+        String strAgilF = FieldAgilidadF.getText();
+        int AgilF = Integer.parseInt(strAgilF);
+        String strAgilM = FieldAgilidadM.getText();
+        int AgilM = Integer.parseInt(strAgilM);
+        String strFuerza = FieldFuerza.getText();
+        int fuerza = Integer.parseInt(strFuerza);
+        String strHp = FieldHP.getText();
+        int vida = Integer.parseInt(strHp);
+        modelo.addElement(new Personaje(FieldNombre.getText(), FieldPoder.getText(), FieldDebilidad.getText(), CBUniverso.getItemAt(index), AgilF, AgilM, fuerza, vida));
 
-        DefaultTreeModel m
-                = (DefaultTreeModel) jt_personajes.getModel();
-        personaje_seleccionada.setNombre(
-                JOptionPane.showInputDialog("nombre"));
-        m.reload();
-    }//GEN-LAST:event_opcion_modificarActionPerformed
+        jl_personas.setModel(modelo);
+    }//GEN-LAST:event_OpListarNodoActionPerformed
 
     private void BtnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnListarActionPerformed
         abrir_universos();
@@ -410,9 +421,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnFlechaActionPerformed
 
     private void jt_personajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_personajesMouseClicked
-        // TODO add your handling code here:
+
         if (evt.isMetaDown()) {
-            //seleccionar un nodo con click derecho
             int row = jt_personajes.getClosestRowForLocation(
                     evt.getX(), evt.getY());
             jt_personajes.setSelectionRow(row);
@@ -420,16 +430,31 @@ public class Principal extends javax.swing.JFrame {
                     = jt_personajes.getSelectionPath().
                             getLastPathComponent();
             nodo_seleccionado = (DefaultMutableTreeNode) v1;
-            if (nodo_seleccionado.getUserObject() instanceof Personaje) {
-                personaje_seleccionada
-                        = (Personaje) nodo_seleccionado.
-                                getUserObject();
-                menu_popup.show(evt.getComponent(),
-                        evt.getX(), evt.getY());
-            }
-
+            menu_popup.show(evt.getComponent(),
+                    evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jt_personajesMouseClicked
+
+    private void OpListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpListarActionPerformed
+        DefaultListModel modelo
+                = (DefaultListModel) jl_personas.getModel();
+
+        int index = CBUniverso.getSelectedIndex();
+        String strAgilF = FieldAgilidadF.getText();
+        int AgilF = Integer.parseInt(strAgilF);
+        String strAgilM = FieldAgilidadM.getText();
+        int AgilM = Integer.parseInt(strAgilM);
+        String strFuerza = FieldFuerza.getText();
+        int fuerza = Integer.parseInt(strFuerza);
+        String strHp = FieldHP.getText();
+        int vida = Integer.parseInt(strHp);
+        
+        for (int i = 0; i < personajes.size(); i++) {
+            modelo.addElement(new Personaje(FieldNombre.getText(), FieldPoder.getText(), FieldDebilidad.getText(), CBUniverso.getItemAt(index), AgilF, AgilM, fuerza, vida));
+        }
+
+        jl_personas.setModel(modelo);
+    }//GEN-LAST:event_OpListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,6 +504,16 @@ public class Principal extends javax.swing.JFrame {
         this.setVisible(false);
         DialogListar.setVisible(true);
     }
+
+    public String impUni() {
+        String cadena = "";
+        for (Personaje personaje : personajes) {
+            if (personaje instanceof Personaje) {
+                cadena += personajes.indexOf(personaje) + "- " + personaje + "\n";
+            }
+        }
+        return cadena;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCrud;
     private javax.swing.JButton BtnFlecha;
@@ -508,6 +543,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LbPoder;
     private javax.swing.JLabel LbUniverso;
     private javax.swing.JMenuItem OpListar;
+    private javax.swing.JMenuItem OpListarNodo;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -519,7 +555,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JList jl_personas;
     private javax.swing.JTree jt_personajes;
     private javax.swing.JPopupMenu menu_popup;
-    private javax.swing.JMenuItem opcion_modificar;
     // End of variables declaration//GEN-END:variables
 DefaultMutableTreeNode nodo_seleccionado;
     Personaje personaje_seleccionada;
